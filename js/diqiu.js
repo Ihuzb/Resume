@@ -1,0 +1,25 @@
+/**
+ * Created by Administrator on 2016/10/5.
+ */
+$(function(){
+    $("#liao").click(function(){
+        $("#jie").show()
+        $("#yuan").toggleClass("yuann")
+        $("#yuan1").toggleClass("yuan2")
+    })
+    $("#shu").click(function(){
+        $("#lian").show()
+        $("#yuan").toggleClass("yuann")
+        $("#yuan1").toggleClass("yuan2")
+    })
+    $("#jing").click(function(){
+        $("#tong").show()
+        $("#yuan").toggleClass("yuann")
+        $("#yuan1").toggleClass("yuan2")
+    })
+    $("#fan").click(function(){
+        $("#yuan1>ul").delay(1000).fadeOut()
+        $("#yuan").toggleClass("yuann")
+        $("#yuan1").toggleClass("yuan2")
+    })
+})
