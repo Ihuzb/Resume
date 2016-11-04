@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/lizi.css"/>
     <script src="js/jquery-1.12.4.js"></script>
     <script src='js/jquery.particleground.min.js'></script>
+    <script src="js/index.js"></script>
     <script src='js/demo.js'></script>
     <link rel="stylesheet" href="css/index.css">
     <script src="js/fastclick.js"></script>
@@ -131,7 +132,8 @@
                                 <div class="rb-week">
                                     <div><span class="rb-city" style="line-height: 2">Canvas<br>小游戏</span><span
                                             class="icon-clima-2"></span></div>
-                                    <iframe src="niao/index.html" width="70%" height="100%" scrolling="no" marginheight="0"></iframe>
+                                    <iframe src="niao/index.html" width="70%" height="100%" scrolling="no"
+                                            marginheight="0"></iframe>
                                     <!--<div><span>Mon</span><span class="icon-clima-1"></span><span>22°C</span></div>-->
                                     <!--<div><span>Tue</span><span class="icon-clima-1"></span><span>20°C</span></div>-->
                                     <!--<div><span>Wed</span><span class="icon-clima-1"></span><span>21°C</span></div>-->
@@ -208,7 +210,11 @@
                 </div>
                 <!-- /container -->
             </div>
-            <div class="page page4 section section--shots section--right" style="overflow: hidden">
+            <div class="page page4 section section--shots section--right cd-intro" style="overflow: hidden">
+                <!--<div class="cd-intro-content bouncy">-->
+                <!--<h1>CSS3页面动画出入效果</h1>-->
+                <!--<p>一款非常适合用于banner以及整屏元素的动画</p>-->
+                <!--</div>-->
                 <div class="isolayer isolayer--deco4">
                     <ul class="grid">
                         <li class="grid__item">
@@ -338,6 +344,10 @@
 <script src="js/win8/jquery.fittext.js"></script>
 <script src="js/win8/boxgrid.example2.js"></script>
 <script>
+    $(function () {
+
+    });
+
     $(document).ready(function () {
         var $wrap = $('.wrapper'), pages = $('.page').length, scrolling = false, currentPage = 1, $navPanel = $('.nav-panel'), $scrollBtn = $('.scroll-btn'), $navBtn = $('.nav-btn');
 
@@ -346,6 +356,17 @@
                 return (css.match(/(^|\s)active-page\S+/g) || []).join(' ');
             });
             $wrap.addClass('active-page' + currentPage);
+            if (currentPage == 4) {
+                $(".wrapper,.active-page4").find(".page4").append('<div class="xiangmu cd-intro-content bouncy">' +
+                        '<h1>项目作品展示</h1>' +
+                        '<p>点击相应项目可查看项目！</p>' +
+                        '</div>')
+            } else {
+                setTimeout(function(){
+                    $(".wrapper," + '.active-page' + currentPage).find(".page4").find(".bouncy").remove()
+
+                },2000)
+            }
             $navBtn.removeClass('active');
             $('.nav-btn.nav-page' + currentPage).addClass('active');
             $navPanel.addClass('invisible');
@@ -415,6 +436,7 @@
                 } else {
                     $wrap.animate({'top': '-' + (target - 1) * 100 + '%'}, 1000);
                 }
+
             }
         });
         $("#caidan>a").each(function () {
@@ -443,6 +465,7 @@
             })
         })
     });
+
     (function () {
         new IsoGrid(document.querySelector('.isolayer--deco4'), {
             perspective: 3000,

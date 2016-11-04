@@ -157,7 +157,7 @@ a:hover, a:focus {
 	position: relative;
 	height: 100vh;
 
-	padding: 7vmax;
+	/*padding: 7vmax;*/
 }
 
 .section--right {
