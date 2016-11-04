@@ -1,0 +1,100 @@
+* {
+    font-family: "微软雅黑" !important;
+}
+
+.geren {
+    width: 100%;
+    color: white;
+    font-size: 50px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background: transparent;
+    transform: translateX(-50%) translateY(-80%);
+}
+
+.geren h1 {
+    margin: 0;
+    padding: 0 !important;
+}
+
+.geren h1:after {
+    content: "个人简历";
+    letter-spacing: 10px;
+    font-size: 75px;
+    line-height: 1;
+}
+
+.geren p {
+    color: white;
+    font-size: 30px;
+    letter-spacing: 20px;
+    font-weight: 100;
+}
+
+.section {
+    overflow: hidden;
+}
+
+.section .fp-controlArrow {
+    opacity: 0.5;
+}
+
+.page2 .effect-1 {
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.page2 .effect-4 {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.page2 .effect-4 p {
+    font-size: 13px;
+}
+
+.jingyan span {
+    padding: 0 !important;
+    margin-top: 10px;
+}
+
+.jingyan strong {
+    border-left: 2px solid white;
+}
+
+.jineng {
+    width: 70% !important;
+    height: 33.33% !important;
+}
+
+.icon-clima-1 {
+    overflow: hidden;
+}
+
+.icon-clima-11 {
+    overflow: hidden;
+}
+
+.icon-clima-2 {
+    overflow: hidden;
+}
+
+#main {
+    background-color: white !important;
+}
+
+.xianshi::before {
+    color: black;
+}
+
+.xiangmu {
+    position: absolute;
+    background: transparent;
+    right: 70px;
+    top: 50%;
+    transform: translateY(-50%);
+}

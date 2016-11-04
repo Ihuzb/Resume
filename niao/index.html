@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html {
+            height: 100%;
+            width: 800px;
+            margin: 0 auto;
+        }
+
+        canvas {
+            /*border: 1px red solid;*/
+            /*display: block;*/
+            /*margin: 0 auto;*/
+        }
+
+        .bei {
+            background: url("imgs/z9B.jpg") center no-repeat;
+            width: 800px;
+            height: 600px;
+            background-size: 85%;
+            left: 50%;
+            top: 50%;
+            position: absolute;
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        .go {
+            text-align: center;
+            line-height: 50px;
+            width: 100px;
+            height: 50px;
+            background: #9CE759;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+    </style>
+    <script src="js/image.js"></script>
+    <script src="js/gethuabu.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/bird.js"></script>
+    <script src="js/sky.js"></script>
+    <script src="js/dadi.js"></script>
+    <script src="js/guandao.js"></script>
+    <script src="js/timer.js"></script>
+    <script src="js/stop.js"></script>
+</head>
+<body>
+<div id="can"></div>
+
+<div class="bei">
+    <div class="go">开始</div>
+</div>
+
+<script>
+    var hua, timm, kaishi, jieshu, dian = false
+    var goo = document.querySelector(".go")
+    var bei = document.querySelector(".bei")
+    goo.onclick = function () {
+        goo.style.display = "none"
+        bei.style.display = "none"
+        dian = true
+        console.log(dian)
+        getImae({
+            bird: 'imgs/bird.png',
+            land: 'imgs/land.png',
+            pipeDown: 'imgs/pipeDown.png',
+            pipeUp: 'imgs/pipeUp.png',
+            sky: 'imgs/sky.png'
+        }, function (imgeObj) {
+            console.log(imgeObj)
+            hua = huabu("can", imgeObj.sky.width, imgeObj.sky.height)
+            var obj = [], OK = false, birlx, birly, bir
+            obj.push(new sky({
+                x: 0,
+                y: 0,
+                hua: hua,
+                img: imgeObj.sky
+            }));
+            obj.push(new sky({
+                x: imgeObj.sky.width,
+                y: 0,
+                hua: hua,
+                img: imgeObj.sky
+            }));
+            for (var i = 0; i < 6; i++) {
+                obj.push(new guandao({
+                    x: 300 + imgeObj.pipeDown.width * 4 * i,
+                    hua: hua,
+                    imgS: imgeObj.pipeDown,
+                    imgX: imgeObj.pipeUp
+                }))
+            }
+            for (var i = 0; i < 4; i++) {
+                obj.push(new dadi({
+                    x: imgeObj.land.width * i,
+                    y: imgeObj.sky.height - imgeObj.land.height,
+                    img: imgeObj.land,
+                    hua: hua
+                }))
+            }
+            bir = new bird({
+                x: 10,
+                y: 10,
+                hua: hua,
+                img: imgeObj.bird,
+                lie: 3,
+                hang: 1
+            })
+            obj.push(bir);
+            obj.push(new time({
+                hua: hua,
+                time: Date.now()
+            }));
+            kaishi = Date.now();
+            function timer() {
+                var cha = jieshu - kaishi
+                var housr = Math.floor(cha / (1000 * 60 * 60));
+                var minutes = Math.floor(cha % (1000 * 60 * 60) / (1000 * 60));
+                var seconds = Math.floor(cha % (1000 * 60) / 1000);
+                minutes = minutes < 10 ? "0" + minutes : minutes
+                seconds = seconds < 10 ? "0" + seconds : seconds
+                timm = "持续时间:" + housr + "时" + minutes + "分钟" + seconds + "秒"
+            };
+            (function donghua() {
+                birlx = bir.x + bir.oneW / 2, birly = bir.y + bir.oneH / 2
+                if (birly < 0 || birly > imgeObj.sky.height - imgeObj.land.height || hua.isPointInPath(birlx, birly)) {
+                    OK = true
+                }
+                hua.beginPath()
+                obj.forEach(function (val) {
+                    val.draw()
+                    val.update()
+                })
+                if (!OK) {
+                    requestAnimationFrame(donghua);
+                }
+                if (OK) {
+                    jieshu = Date.now()
+                    timer()
+                    alert("Game Over " + timm + " 点击确定重新开始")
+                    window.location.reload();
+                }
+            }());
+        })
+    }
+
+</script>
+</body>
+</html>
